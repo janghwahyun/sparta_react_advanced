@@ -13,14 +13,15 @@ const Signup = props => {
 
   const dispatch = useDispatch();
 
-  const signUp = () => {
-    if (id === '' || pwd === '' || user_name === '') {
-      return;
-    }
 
-    if (pwd !== pwd_check) {
-      return; //패스워드 다르면 이거 실행 안한다.
-    }
+  const signUp = () => {
+
+    if(id === '' || pwd === '' || user_name ""){}
+
+
+      if (pwd !== pwd_check) {
+        return; //패스워드 다르면 이거 실행 안한다.
+      }
 
     dispatch(userActions.signupFB(id, pwd, user_name));
   };

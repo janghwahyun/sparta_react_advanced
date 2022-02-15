@@ -14,19 +14,12 @@ const Signup = props => {
   const dispatch = useDispatch();
 
   const signUp = () => {
-    if (id === '' || pwd === '' || user_name === '') {
-      return;
-    }
-
-    if (pwd !== pwd_check) {
-      return; //패스워드 다르면 이거 실행 안한다.
-    }
-
-    dispatch(userActions.signupFB(id, pwd, user_name));
+    dispatch(userActions.signupFB());
   };
 
   return (
     <React.Fragment>
+      <Header />
       <Grid padding="16px">
         <Text size="32px" bold>
           회원가입
@@ -35,7 +28,8 @@ const Signup = props => {
         <Grid padding="16px 0px">
           <Input
             label="아이디"
-            placeholder="아이디를 입력해주세요." //이메일 형식 아니면 안받야지
+            s
+            placeholder="아이디를 입력해주세요."
             _onChange={e => {
               setId(e.target.value);
             }}
@@ -45,7 +39,7 @@ const Signup = props => {
         <Grid padding="16px 0px">
           <Input
             label="닉네임"
-            placeholder="닉네임을 입력해주세요." //빈칸이면 안넘어가야지
+            placeholder="닉네임을 입력해주세요."
             _onChange={e => {
               setUserName(e.target.value);
             }}
@@ -55,7 +49,7 @@ const Signup = props => {
         <Grid padding="16px 0px">
           <Input
             label="비밀번호"
-            placeholder="비밀번호를 입력해주세요." //비밀번호 다르면 안넘어가야지
+            placeholder="비밀번호를 입력해주세요."
             _onChange={e => {
               setPwd(e.target.value);
             }}

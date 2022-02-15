@@ -43,13 +43,12 @@ const signupFB = (id, pwd, user_name) => {
       .createUserWithEmailAndPassword(id, pwd, user_name)
       .then(user => {
         console.log(user);
-        //사용자 프로필 업데이트 v9
+        //사용자 프로필 업데이트
         updateProfile(auth.currentUser, {
           displayName: user_name,
         })
           .then(() => {
             dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
-            history.push('/');
           })
           .catch(error => {
             console.log(error);

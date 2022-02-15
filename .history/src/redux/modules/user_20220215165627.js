@@ -1,8 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../shared/firebase';
-import { getAuth, updateProfile } from 'firebase/auth';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -41,19 +41,10 @@ const signupFB = (id, pwd, user_name) => {
   return function (dispatch, getState, { history }) {
     auth
       .createUserWithEmailAndPassword(id, pwd, user_name)
-      .then(user => {
+      .then(userCredential => {
         console.log(user);
-        //사용자 프로필 업데이트 v9
-        updateProfile(auth.currentUser, {
-          displayName: user_name,
-        })
-          .then(() => {
-            dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
-            history.push('/');
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        // Signed in
+        let user = userCredential.user;
       })
       .catch(error => {
         const errorCode = error.code;

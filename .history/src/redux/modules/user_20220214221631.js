@@ -1,8 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
+
 import { auth } from '../../shared/firebase';
-import { getAuth, updateProfile } from 'firebase/auth';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -25,6 +25,8 @@ const user_initial = {
   user_name: 'firebase name',
 };
 
+
+
 //middleware actions : 로그인 상태 확인하고 메인페이지로 넘어가 주지
 const loginActions = user => {
   //getState는 뭐임?
@@ -37,30 +39,20 @@ const loginActions = user => {
 
 //auth에 우리가 가입시킬 어떤 유저정볼를 받아서 넘겨줘야하는데, 이걸 미들웨어에서 함.
 
-const signupFB = (id, pwd, user_name) => {
-  return function (dispatch, getState, { history }) {
-    auth
-      .createUserWithEmailAndPassword(id, pwd, user_name)
-      .then(user => {
-        console.log(user);
-        //사용자 프로필 업데이트 v9
-        updateProfile(auth.currentUser, {
-          displayName: user_name,
-        })
-          .then(() => {
-            dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
-            history.push('/');
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
-  };
+const signupFB = (id, pwd, name) => {
+  return function(dispatch,getState,{history} ){
+   auth 
+  .createUserWithEmailAndPassword(auth, email, password)
+  .then((user) => {
+    console.log(user);
+    // Signed in
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  )}
+  }
 };
 
 //reducer, 여기서 불변성 유지(immer)사용, store만들기 위해 reducer사용
