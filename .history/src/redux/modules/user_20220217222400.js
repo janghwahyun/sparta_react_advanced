@@ -30,7 +30,7 @@ const user_initial = {
 const loginFB = (id, pwd) => {
   return function loginFB(dispatch, getState, { history }) {
     auth
-      .signInWithEmailAndPassword(id, pwd)
+      .signInWithEmailAndPassword(auth, id, pwd)
       .then(user => {
         // // Signed in
 

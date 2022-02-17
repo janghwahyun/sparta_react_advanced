@@ -54,6 +54,8 @@ const Login = props => {
           _onClick={() => {
             console.log('로그인 했네');
             login();
+
+            // deleteCookie('user_id');
           }}
         ></Button>
       </Grid>

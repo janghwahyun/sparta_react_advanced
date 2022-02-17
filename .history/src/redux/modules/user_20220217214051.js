@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
 import { auth } from '../../shared/firebase';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth, updateProfile, signInWithEmailAndPassword } from 'firebase/auth';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -29,12 +29,10 @@ const user_initial = {
 
 const loginFB = (id, pwd) => {
   return function loginFB(dispatch, getState, { history }) {
-    auth
-      .signInWithEmailAndPassword(id, pwd)
+    signInWithEmailAndPassword(id, pwd)
       .then(user => {
-        // // Signed in
-
         console.log(user);
+        // // Signed in
         // dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
       })
       .catch(error => {

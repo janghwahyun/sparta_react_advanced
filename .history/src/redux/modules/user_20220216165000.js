@@ -28,19 +28,18 @@ const user_initial = {
 //middleware actions : 로그인 상태 확인하고 메인페이지로 넘어가 주지
 
 const loginFB = (id, pwd) => {
-  return function loginFB(dispatch, getState, { history }) {
+  return function (dispatch, getState, { history }) {
     auth
       .signInWithEmailAndPassword(id, pwd)
       .then(user => {
-        // // Signed in
-
         console.log(user);
-        // dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
+
+        // Signed in
+        dispatch(setUser({ user_name: user.user.displayName, id: id, user_profile: '' }));
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
       });
   };
 };
@@ -56,17 +55,17 @@ const loginFB = (id, pwd) => {
 
 //auth에 우리가 가입시킬 어떤 유저정볼를 받아서 넘겨줘야하는데, 이걸 미들웨어에서 함.
 
-const signupFB = (id, pwd, user_name) => {
-  //user_name을 안넣어주니까 undefined에러가 나네?
+const signupFB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
     auth
-      .createUserWithEmailAndPassword(id, pwd)
+      .createUserWithEmailAndPassword(id, pwd, user_name)
       .then(user => {
+        console.log(user);
         //사용자 프로필 업데이트 v9
         updateProfile(auth.currentUser, {
           displayName: user_name,
         })
-          .then(user => {
+          .then(() => {
             dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
             history.push('/');
           })

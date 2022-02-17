@@ -13,13 +13,13 @@ const Login = props => {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
 
-  const login = () => {
+  const login = (id, pwd) => {
     //인간적으로 빈칸은 알려주자
     if (id === '' || pwd === '') {
       window.alert('응? 아이디나 비번 공백인디?');
       return;
     }
-    dispatch(userActions.loginFB(id, pwd)); //{id, pwd}-> x
+    dispatch(userActions.loginFB({}));
   };
 
   return (
@@ -43,7 +43,7 @@ const Login = props => {
           <Input
             label="패스워드"
             placeholder="패스워드 입력해주세요."
-            _onChange={e => {
+            _onChange={() => {
               setPwd(e.target.value);
             }}
           />
@@ -52,8 +52,9 @@ const Login = props => {
         <Button
           text="로그인하기"
           _onClick={() => {
-            console.log('로그인 했네');
             login();
+
+            // deleteCookie('user_id');
           }}
         ></Button>
       </Grid>

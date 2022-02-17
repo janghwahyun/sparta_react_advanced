@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
 import { auth } from '../../shared/firebase';
 import { getAuth, updateProfile } from 'firebase/auth';
+import dispatch from 'react-redux';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -28,14 +29,13 @@ const user_initial = {
 //middleware actions : 로그인 상태 확인하고 메인페이지로 넘어가 주지
 
 const loginFB = (id, pwd) => {
-  return function loginFB(dispatch, getState, { history }) {
+  return function (dispatch, getState, { history }) {
     auth
       .signInWithEmailAndPassword(id, pwd)
       .then(user => {
-        // // Signed in
-
         console.log(user);
-        // dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
+        // Signed in
+        dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
       })
       .catch(error => {
         const errorCode = error.code;
@@ -56,28 +56,67 @@ const loginFB = (id, pwd) => {
 
 //auth에 우리가 가입시킬 어떤 유저정볼를 받아서 넘겨줘야하는데, 이걸 미들웨어에서 함.
 
+// const signupFB = (id, pwd, user_name) => {
+//   //user_name을 안넣어주니까 undefined에러가 나네?
+//   return function (dispatch, getState, { history }) {
+//     auth
+//       .createUserWithEmailAndPassword(id, pwd)
+//       .then(user => {
+//         //사용자 프로필 업데이트 v9
+//         updateProfile(auth.currentUser, {
+//           displayName: user_name,
+//         })
+//           .then(user => {
+//             dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
+//             history.push('/');
+//           })
+//           .catch(error => {
+//             console.log(error);
+//           });
+//       })
+//       .catch(error => {
+//         const errorCode = error.code;
+//         const errorMessage = error.message;
+//         console.log(errorCode, errorMessage);
+//       });
+//   };
+// };
+
 const signupFB = (id, pwd, user_name) => {
-  //user_name을 안넣어주니까 undefined에러가 나네?
   return function (dispatch, getState, { history }) {
     auth
       .createUserWithEmailAndPassword(id, pwd)
       .then(user => {
-        //사용자 프로필 업데이트 v9
-        updateProfile(auth.currentUser, {
-          displayName: user_name,
-        })
-          .then(user => {
-            dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
+        console.log(user);
+
+        auth.currentUser
+          .updateProfile({
+            displayName: user_name,
+          })
+          .then(() => {
+            dispatch(
+              setUser({
+                user_name: user_name,
+                id: id,
+                user_profile: '',
+                uid: user.user.uid,
+              })
+            );
             history.push('/');
           })
           .catch(error => {
             console.log(error);
           });
+
+        // Signed in
+        // ...
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
         console.log(errorCode, errorMessage);
+        // ..
       });
   };
 };

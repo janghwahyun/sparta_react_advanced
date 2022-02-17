@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
 import { auth } from '../../shared/firebase';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth, updateProfile, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -27,13 +27,13 @@ const user_initial = {
 
 //middleware actions : 로그인 상태 확인하고 메인페이지로 넘어가 주지
 
-const loginFB = (id, pwd) => {
+const loginFB = (user, id, pwd) => {
   return function loginFB(dispatch, getState, { history }) {
     auth
-      .signInWithEmailAndPassword(id, pwd)
-      .then(user => {
+      .signInWithEmailAndPassword(auth, id, pwd)
+      .then(userCredential => {
         // // Signed in
-
+        const user = userCredential.user;
         console.log(user);
         // dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
       })

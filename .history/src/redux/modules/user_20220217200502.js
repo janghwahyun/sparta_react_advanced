@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
 import { auth } from '../../shared/firebase';
 import { getAuth, updateProfile } from 'firebase/auth';
+import dispatch from 'react-redux';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -27,21 +28,49 @@ const user_initial = {
 
 //middleware actions : 로그인 상태 확인하고 메인페이지로 넘어가 주지
 
-const loginFB = (id, pwd) => {
-  return function loginFB(dispatch, getState, { history }) {
-    auth
-      .signInWithEmailAndPassword(id, pwd)
-      .then(user => {
-        // // Signed in
+// const loginFB = (id, pwd) => {
+//   return function (dispatch, getState, { history }) {
+//     auth
+//       .signInWithEmailAndPassword(id, pwd)
+//       .then(user => {
+//         console.log(user);
+//         // Signed in
+//         dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
+//       })
+//       .catch(error => {
+//         const errorCode = error.code;
+//         const errorMessage = error.message;
+//         console.log(errorCode, errorMessage);
+//       });
+//   };
+// };
 
-        console.log(user);
-        // dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+const loginFB = (id, pwd) => {
+  return function (dispatch, getState, { history }) {
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(res => {
+      auth
+        .signInWithEmailAndPassword(id, pwd)
+        .then(user => {
+          console.log(user);
+
+          dispatch(
+            setUser({
+              user_name: user.user.displayName,
+              id: id,
+              user_profile: '',
+              uid: user.user.uid,
+            })
+          );
+
+          history.push('/');
+        })
+        .catch(error => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+
+          console.log(errorCode, errorMessage);
+        });
+    });
   };
 };
 
