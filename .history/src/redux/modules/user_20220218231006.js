@@ -134,7 +134,6 @@ const actionCreators = {
   // loginActions,
   signupFB,
   loginFB,
-  loginCkeckFB,
 };
 
 export { actionCreators };

@@ -13,7 +13,7 @@ import Signup from '../pages/Signup';
 
 import { actionCreators as userActions } from '../redux/modules/user';
 import dispatch from 'react-redux';
-import { apiKey } from './firebase';
+import apiKey from './firebase';
 
 function App() {
   const dispatch = dispatch();
@@ -22,7 +22,7 @@ function App() {
   const is_session = sessionStorage.getItem(_session_Key) ? true : false;
 
   //유즈이펙트는 컴포넌트 라이프사이클에 컴포넌트 디드마운트랑, 디드 업데이트를 동시에 수행
-  React.useEffect(() => {
+  useEffect(() => {
     if (is_session) {
       dispatch(userActions.loginCkeckFB());
     }

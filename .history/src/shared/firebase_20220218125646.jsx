@@ -3,7 +3,7 @@ import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAj-FN1FegNUc8-Qs4R5PxqKYTuCYj-KIQ',
+  apiKey: AIzaSyAj - FN1FegNUc8 - Qs4R5PxqKYTuCYj - KIQ,
   authDomain: 'image-community-357d3.firebaseapp.com',
   projectId: 'image-community-357d3',
   storageBucket: 'image-community-357d3.appspot.com',
@@ -12,9 +12,10 @@ const firebaseConfig = {
   measurementId: 'G-5CPLCL40XP',
 };
 
-const apiKey = firebaseConfig.apiKey;
+const apiKey = f;
+
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
-export { firebaseApp, db, auth, apiKey };
+export { firebaseApp, db, auth };

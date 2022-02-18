@@ -85,24 +85,27 @@ const signupFB = (id, pwd, user_name) => {
   };
 };
 
-const loginCkeckFB = () => {
-  return function (dispatch, getState, { history }) {
-    auth.onAuthStateChanged(user => {
-      if (user) {
+const loginCkeckFB =() => {
+  return funtion (dispatch, getState, {history}){
+    auth.onAuthStateChanged((user)=>{
+      if(user){
         dispatch(
-          setUser({
+          setUser(
+            {
             user_name: user.displayName,
-            user_profile: '',
+            user_profile: "",
             id: user.email,
             uid: user.uid,
-          })
-        );
+            }
+          )
+        )
       } else {
-        dispatch(logOut());
+        
       }
     });
-  };
-};
+
+
+
 
 //reducer, 여기서 불변성 유지(immer)사용, store만들기 위해 reducer사용
 export default handleActions(
@@ -134,7 +137,6 @@ const actionCreators = {
   // loginActions,
   signupFB,
   loginFB,
-  loginCkeckFB,
 };
 
 export { actionCreators };

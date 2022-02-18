@@ -3,7 +3,7 @@ import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAj-FN1FegNUc8-Qs4R5PxqKYTuCYj-KIQ',
+  apiKey: 'AIzaSyAj - FN1FegNUc8 - Qs4R5PxqKYTuCYj - KIQ',
   authDomain: 'image-community-357d3.firebaseapp.com',
   projectId: 'image-community-357d3',
   storageBucket: 'image-community-357d3.appspot.com',

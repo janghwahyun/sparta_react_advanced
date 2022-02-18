@@ -11,10 +11,8 @@ const firebaseConfig = {
   appId: '1:809271010096:web:e362e3866429de7abddef5',
   measurementId: 'G-5CPLCL40XP',
 };
-
-const apiKey = firebaseConfig.apiKey;
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
-export { firebaseApp, db, auth, apiKey };
+export { firebaseApp, db, auth };

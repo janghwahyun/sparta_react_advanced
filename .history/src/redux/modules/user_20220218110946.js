@@ -2,8 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
 import { auth } from '../../shared/firebase';
-import { getAuth, updateProfile, setPersistence, browserSessionPersistence, onAuthStateChanged } from 'firebase/auth';
-import firebase from 'firebase/compat/app';
+import { getAuth, updateProfile } from 'firebase/auth';
 
 //액션 타입
 const LOG_IN = 'LOG_IN';
@@ -29,22 +28,20 @@ const user_initial = {
 //middleware actions : 로그인 상태 확인하고 메인페이지로 넘어가 주지
 const loginFB = (id, pwd) => {
   return function loginFB(dispatch, getState, { history }) {
-    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(res => {
-      auth
-        .signInWithEmailAndPassword(id, pwd)
-        .then(user => {
-          // // Signed in
+    auth
+      .signInWithEmailAndPassword(id, pwd)
+      .then(user => {
+        // // Signed in
 
-          console.log(user);
-          dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
-          history.push('/');
-        })
-        .catch(error => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
-        });
-    });
+        console.log(user);
+        dispatch(setUser({ user_name: user.user.displayName, user_profile: '', id: id, uid: user.user.uid }));
+        history.push('/');
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 };
 
@@ -70,7 +67,7 @@ const signupFB = (id, pwd, user_name) => {
           displayName: user_name,
         })
           .then(user => {
-            dispatch(setUser({ user_name: user_name, id: id, user_profile: '', uid: user.user.uid }));
+            dispatch(setUser({ user_name: user_name, id: id, user_profile: '' }));
             history.push('/');
           })
           .catch(error => {
@@ -82,25 +79,6 @@ const signupFB = (id, pwd, user_name) => {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
-  };
-};
-
-const loginCkeckFB = () => {
-  return function (dispatch, getState, { history }) {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        dispatch(
-          setUser({
-            user_name: user.displayName,
-            user_profile: '',
-            id: user.email,
-            uid: user.uid,
-          })
-        );
-      } else {
-        dispatch(logOut());
-      }
-    });
   };
 };
 
@@ -134,7 +112,6 @@ const actionCreators = {
   // loginActions,
   signupFB,
   loginFB,
-  loginCkeckFB,
 };
 
 export { actionCreators };

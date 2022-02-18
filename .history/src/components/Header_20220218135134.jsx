@@ -10,12 +10,9 @@ const Header = props => {
   const dispatch = useDispatch();
 
   const is_login = useSelector(state => state.user.is_login);
-  const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-
-  const is_session = sessionStorage.getItem(_session_Key) ? true : false;
-
-  // console.log(_session_Key);
-  // console.log(sessionStorage.getItem(_session_Key));
+  const _sesstion_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  console.log(_sesstion_Key);
+  console.log(sessionStorage.getItem(_sesstion_Key));
 
   // const [is_login, setIsLogin] = useState(false); //처음은 로그인 안했다 -> false
   // useSelector가 useEffect친구들을 대신함.
@@ -30,7 +27,7 @@ const Header = props => {
   //   }
   // });
 
-  if (is_login && is_session) {
+  if (is_login) {
     return (
       <React.Fragment>
         <Grid is_flex padding="30px">

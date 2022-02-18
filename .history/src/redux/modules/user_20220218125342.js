@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { deleteCookie, getCookie, setCookie } from '../../shared/Cookie';
 import { auth } from '../../shared/firebase';
-import { getAuth, updateProfile, setPersistence, browserSessionPersistence, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, updateProfile, setPersistence, browserSessionPersistence } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 
 //액션 타입
@@ -85,25 +85,6 @@ const signupFB = (id, pwd, user_name) => {
   };
 };
 
-const loginCkeckFB = () => {
-  return function (dispatch, getState, { history }) {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        dispatch(
-          setUser({
-            user_name: user.displayName,
-            user_profile: '',
-            id: user.email,
-            uid: user.uid,
-          })
-        );
-      } else {
-        dispatch(logOut());
-      }
-    });
-  };
-};
-
 //reducer, 여기서 불변성 유지(immer)사용, store만들기 위해 reducer사용
 export default handleActions(
   {
@@ -134,7 +115,6 @@ const actionCreators = {
   // loginActions,
   signupFB,
   loginFB,
-  loginCkeckFB,
 };
 
 export { actionCreators };

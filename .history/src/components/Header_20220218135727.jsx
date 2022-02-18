@@ -11,9 +11,9 @@ const Header = props => {
 
   const is_login = useSelector(state => state.user.is_login);
   const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-
-  const is_session = sessionStorage.getItem(_session_Key) ? true : false;
-
+  
+  const is_session = sessionStorage.getItem(_session_Key); ? true : false;
+  
   // console.log(_session_Key);
   // console.log(sessionStorage.getItem(_session_Key));
 
@@ -30,7 +30,7 @@ const Header = props => {
   //   }
   // });
 
-  if (is_login && is_session) {
+  if (is_login && is_session ) {
     return (
       <React.Fragment>
         <Grid is_flex padding="30px">
