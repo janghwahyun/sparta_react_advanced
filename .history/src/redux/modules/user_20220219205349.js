@@ -105,7 +105,7 @@ const loginCkeckFB = () => {
 };
 
 const logoutFB = () => {
-  return function (dispatch, getState, { history }) {
+  return function (dispatch, getStatem, { history }) {
     auth.signOut().then(() => {
       dispatch(logOut());
       history.replace('/');

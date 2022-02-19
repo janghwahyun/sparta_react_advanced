@@ -104,13 +104,13 @@ const loginCkeckFB = () => {
   };
 };
 
-const logoutFB = () => {
-  return function (dispatch, getState, { history }) {
-    auth.signOut().then(() => {
+const logoutFB = ()=>{
+  return function (dispatch, getStatem {history}){
+    auth.signOut().then(()=>{
       dispatch(logOut());
       history.replace('/');
-    });
-  };
+    })
+  }
 };
 
 //reducer, 여기서 불변성 유지(immer)사용, store만들기 위해 reducer사용

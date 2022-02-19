@@ -14,7 +14,6 @@ import Signup from '../pages/Signup';
 import { actionCreators as userActions } from '../redux/modules/user';
 
 import { apiKey } from './firebase';
-import { useDispatch } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();

@@ -11,13 +11,11 @@ import PostList from '../pages/PostList';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 
-import { actionCreators as userActions } from '../redux/modules/user';
-
+import { actionCreators as userActions } import dispatch from 'react-redux';
 import { apiKey } from './firebase';
-import { useDispatch } from 'react-redux';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = dispatch();
 
   const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
   const is_session = sessionStorage.getItem(_session_Key) ? true : false;

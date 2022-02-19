@@ -12,22 +12,21 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 
 import { actionCreators as userActions } from '../redux/modules/user';
-
+import dispatch from 'react-redux';
 import { apiKey } from './firebase';
-import { useDispatch } from 'react-redux';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = dispatch();
 
   const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
   const is_session = sessionStorage.getItem(_session_Key) ? true : false;
 
-  //유즈이펙트는 컴포넌트 라이프사이클에 컴포넌트 디드마운트랑, 디드 업데이트를 동시에 수행
-  useEffect(() => {
-    if (is_session) {
-      dispatch(userActions.loginCkeckFB());
-    }
-  }, []); //대괄호 안에있는 값이 업데이트 될 때, 작동한다. 만약 아무것도 없다면? 한번만 실행된다는 뜻. 즉 componentDidMount역할
+  // //유즈이펙트는 컴포넌트 라이프사이클에 컴포넌트 디드마운트랑, 디드 업데이트를 동시에 수행
+  // React.useEffect(() => {
+  //   if (is_session) {
+  //     dispatch(userActions.loginCkeckFB());
+  //   }
+  // }, []); //대괄호 안에있는 값이 업데이트 될 때, 작동한다. 만약 아무것도 없다면? 한번만 실행된다는 뜻. 즉 componentDidMount역할
 
   return (
     <>
