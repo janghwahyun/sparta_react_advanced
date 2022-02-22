@@ -31,54 +31,54 @@ const Header = props => {
   // });
 
   <Permit>
-    <React.Fragment>
-      <Grid is_flex padding="30px">
-        <Grid>
-          <Text margin="0px" size="24px" bold>
-            헬로
-          </Text>
-        </Grid>
+      <React.Fragment>
+        <Grid is_flex padding="30px">
+          <Grid>
+            <Text margin="0px" size="24px" bold>
+              헬로
+            </Text>
+          </Grid>
 
-        <Grid is_flex>
-          <Button text="MY PROFILE"></Button>
-          <Button text="알람"></Button>
-          <Button
-            text="로그아웃"
-            _onClick={() => {
-              dispatch(userActions.logoutFB());
-            }}
-          ></Button>
+          <Grid is_flex>
+            <Button text="MY PROFILE"></Button>
+            <Button text="알람"></Button>
+            <Button
+              text="로그아웃"
+              _onClick={() => {
+                dispatch(userActions.logoutFB());
+              }}
+            ></Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </React.Fragment>
-  </Permit>;
+      </React.Fragment>
+  </Permit>
+    return (
+      <React.Fragment>
+        <Grid is_flex padding="30px">
+          <Grid>
+            <Text margin="0px" size="24px" bold>
+              안녕 하이 반가워
+            </Text>
+          </Grid>
 
-  return (
-    <React.Fragment>
-      <Grid is_flex padding="30px">
-        <Grid>
-          <Text margin="0px" size="24px" bold>
-            안녕 하이 반가워
-          </Text>
+          <Grid is_flex>
+            <Button
+              text="로그인"
+              _onClick={() => {
+                history.push('/login');
+              }}
+            ></Button>
+            <Button
+              text="회원가입"
+              _onClick={() => {
+                history.push('/signup');
+              }}
+            ></Button>
+          </Grid>
         </Grid>
-
-        <Grid is_flex>
-          <Button
-            text="로그인"
-            _onClick={() => {
-              history.push('/login');
-            }}
-          ></Button>
-          <Button
-            text="회원가입"
-            _onClick={() => {
-              history.push('/signup');
-            }}
-          ></Button>
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 };
 
 Header.defaultProps = {};
