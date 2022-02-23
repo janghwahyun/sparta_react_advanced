@@ -15,7 +15,6 @@ const Login = props => {
 
   const login = () => {
     let _reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
-    console.log(_reg.test(id));
 
     //solbel.tistory.com/375 [개발자의 끄적끄적]
 

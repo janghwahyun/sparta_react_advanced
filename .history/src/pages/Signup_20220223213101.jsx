@@ -4,7 +4,6 @@ import { Grid, Text, Input, Button } from '../elements/Index';
 
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import { emailCheck } from '../shared/Common';
 
 const Signup = props => {
   const [id, setId] = useState('');

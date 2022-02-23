@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 
-import { Grid, Button } from '../elements/Index';
+import { Grid } from '../elements/Index';
 import Header from '../components/Header';
 import PostList from '../pages/PostList';
 import Login from '../pages/Login';
@@ -42,9 +42,7 @@ function App() {
         </ConnectedRouter>
       </Grid>
       <Permit>
-        <Button is_float text="+">
-          글쓰기 버튼
-        </Button>
+        <div">글쓰기 버튼</div>
       </Permit>
     </>
   );
