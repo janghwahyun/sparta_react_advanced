@@ -8,6 +8,10 @@ const CommentList = props => {
       <Grid padding="16px">
         <CommentItem />
         <CommentItem />
+        <CommentItem />
+        <CommentItem />
+        <CommentItem />
+        <CommentItem />
       </Grid>
     </>
   );
@@ -16,31 +20,25 @@ const CommentList = props => {
 export default CommentList;
 
 //한파일에 컴포넌트 여러개? 가능함
-export const CommentItem = props => {
-  const { user_profile, user_name, user_id, post_id, contents, insert_dt } = props;
 
+const CommentItem = props => {
+  const { user_profile, user_name, user_id, post_id, insert_dt } = props;
   return (
     <>
       <Grid is_flex>
         <Grid is_flex>
           <Image shape="circle"></Image>
-          <Text>{user_name}</Text>
-        </Grid>
-
-        <Grid is_flex margin="0px 10px">
-          <Text margin="0px">{contents}</Text>
-          <Text margin="0px">{insert_dt}</Text>
+          <Text bold>{user_name}</Text>
         </Grid>
       </Grid>
     </>
   );
 };
 
-CommentItem.defaultProps = {
+CommentItem.defalutProps = {
   user_profile: '',
   user_name: 'jang',
   user_id: '',
   post_id: 1,
-  contents: '뭘봐',
   insert_dt: '2022-02-02 21:00:00',
 };

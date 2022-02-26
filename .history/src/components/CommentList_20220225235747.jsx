@@ -16,6 +16,7 @@ const CommentList = props => {
 export default CommentList;
 
 //한파일에 컴포넌트 여러개? 가능함
+
 export const CommentItem = props => {
   const { user_profile, user_name, user_id, post_id, contents, insert_dt } = props;
 

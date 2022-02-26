@@ -16,6 +16,7 @@ const CommentList = props => {
 export default CommentList;
 
 //한파일에 컴포넌트 여러개? 가능함
+
 export const CommentItem = props => {
   const { user_profile, user_name, user_id, post_id, contents, insert_dt } = props;
 
@@ -27,9 +28,9 @@ export const CommentItem = props => {
           <Text>{user_name}</Text>
         </Grid>
 
-        <Grid is_flex margin="0px 10px">
-          <Text margin="0px">{contents}</Text>
-          <Text margin="0px">{insert_dt}</Text>
+        <Grid>
+          <Text>{contents}</Text>
+          <Text>{insert_dt}</Text>
         </Grid>
       </Grid>
     </>

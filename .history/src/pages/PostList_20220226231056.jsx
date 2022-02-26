@@ -9,10 +9,7 @@ const PostList = props => {
 
   return (
     <>
-      {/* <Post  /> */}
-      {post_list.map((p, idx) => {
-        return <Post key={p.id} {...p} />;
-      })}
+      <Post />
     </>
   );
 };
