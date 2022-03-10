@@ -30,38 +30,8 @@ const initialPost = {
 };
 
 // 파이어스토어에 input저장 추가 함수
-const addPostFB = (contents = '') => {
-  return function (dispatch, getState, { history }) {
-    const postDB = firestore.collection('post'); // 어디 콜렉션에 넣을지 선택해 줘야겠지
-    const _user = getState().user.user;
-
-    const user_info = {
-      user_name: _user.user_name,
-      user_id: _user.uid,
-      user_profile: _user.user_profile,
-    };
-
-    const _post = {
-      ...initialPost,
-      contents: contents,
-      insert_dt: moment().format('YYYY-MM-DD hh:mm:ss'), //어? 왜 위에 있는데 불러옴? 만들어지는 시점이 addPostFB불어올 때,
-    };
-
-    // console.log({ ...user_info, ..._post });
-
-    // return;
-
-    postDB
-      .add({ ...user_info, ..._post })
-      .then(doc => {
-        let post = { user_info, ..._post, id: doc.id };
-        dispatch(addPost(post)); //redux의 저장 but 저장할 때 파이어스토어와 모양새가 달라 모양새 맞춰주는 작업필요
-        history.replace('/');
-      })
-      .catch(err => {
-        console.log('post 작성에 실패했음', err);
-      });
-  };
+const addPostFB = () => {
+  return function (dispatch, getState, { history }) {};
 };
 
 const getPostFB = () => {
@@ -128,10 +98,7 @@ export default handleActions(
         draft.list = action.payload.post_list;
       }),
 
-    [ADD_POST]: (state, action) =>
-      produce(state, draft => {
-        draft.list.unshift(action.payload.post); //push()는 뒤에 붙으니까 unshift를 사용
-      }),
+    [ADD_POST]: (state, action) => produce(state, draft => {}),
   },
   initialState
 );
@@ -140,7 +107,6 @@ const actionCreators = {
   setPost,
   addPost,
   getPostFB,
-  addPostFB,
 };
 
 export { actionCreators };

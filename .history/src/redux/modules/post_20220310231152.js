@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { firestore } from '../../shared/firebase';
 import PostList from '../../pages/PostList';
-import moment from 'moment';
+import 'moment';
 
 // 필요한 액션이 뭐가 있는 지 먼저 만들어 주고
 const SET_POST = 'SET_POST';
@@ -26,42 +26,12 @@ const initialPost = {
     'https://mblogthumb-phinf.pstatic.net/MjAxODAxMjFfMTc4/MDAxNTE2NTIzNTA3MTM4.GUtpNrCumhvtJ7PR_FvSnY2DpYq9zjfoRTW0h1RCnZ0g.kJN5VKZmakd8MwSvFXcP3bCLN9Tvo4rIAJkfc_oDgmUg.JPEG.dodami1/20180114_164631.jpg?type=w800',
   contents: '닥스네요',
   comment_cnt: 10,
-  insert_dt: moment().format('YYYY-MM-DD hh:mm:ss'),
+  insert_dt: '2022-02-06 14:00:00',
 };
 
 // 파이어스토어에 input저장 추가 함수
-const addPostFB = (contents = '') => {
-  return function (dispatch, getState, { history }) {
-    const postDB = firestore.collection('post'); // 어디 콜렉션에 넣을지 선택해 줘야겠지
-    const _user = getState().user.user;
-
-    const user_info = {
-      user_name: _user.user_name,
-      user_id: _user.uid,
-      user_profile: _user.user_profile,
-    };
-
-    const _post = {
-      ...initialPost,
-      contents: contents,
-      insert_dt: moment().format('YYYY-MM-DD hh:mm:ss'), //어? 왜 위에 있는데 불러옴? 만들어지는 시점이 addPostFB불어올 때,
-    };
-
-    // console.log({ ...user_info, ..._post });
-
-    // return;
-
-    postDB
-      .add({ ...user_info, ..._post })
-      .then(doc => {
-        let post = { user_info, ..._post, id: doc.id };
-        dispatch(addPost(post)); //redux의 저장 but 저장할 때 파이어스토어와 모양새가 달라 모양새 맞춰주는 작업필요
-        history.replace('/');
-      })
-      .catch(err => {
-        console.log('post 작성에 실패했음', err);
-      });
-  };
+const addPostFB = () => {
+  return;
 };
 
 const getPostFB = () => {
@@ -128,10 +98,7 @@ export default handleActions(
         draft.list = action.payload.post_list;
       }),
 
-    [ADD_POST]: (state, action) =>
-      produce(state, draft => {
-        draft.list.unshift(action.payload.post); //push()는 뒤에 붙으니까 unshift를 사용
-      }),
+    [ADD_POST]: (state, action) => produce(state, draft => {}),
   },
   initialState
 );
@@ -140,7 +107,6 @@ const actionCreators = {
   setPost,
   addPost,
   getPostFB,
-  addPostFB,
 };
 
 export { actionCreators };

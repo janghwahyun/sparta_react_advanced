@@ -7,7 +7,9 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 const PostWrite = props => {
   const dispatch = useDispatch();
-
+  const addPost = () => {
+    dispatch(postActions.addPostFB(contents));
+  };
   //App.js에서 is_login이 세션의 유무를 체크했으니 여기서는 그냥 is_login만 체크함
   const is_login = useSelector(state => state.user.is_login);
   // const navigate = useNavigate();
@@ -17,10 +19,6 @@ const PostWrite = props => {
 
   const changeContents = e => {
     setContents(e.target.value);
-  };
-
-  const addPost = () => {
-    dispatch(postActions.addPostFB(contents));
   };
 
   if (!is_login) {

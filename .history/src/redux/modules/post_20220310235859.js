@@ -56,7 +56,6 @@ const addPostFB = (contents = '') => {
       .then(doc => {
         let post = { user_info, ..._post, id: doc.id };
         dispatch(addPost(post)); //redux의 저장 but 저장할 때 파이어스토어와 모양새가 달라 모양새 맞춰주는 작업필요
-        history.replace('/');
       })
       .catch(err => {
         console.log('post 작성에 실패했음', err);
@@ -130,7 +129,7 @@ export default handleActions(
 
     [ADD_POST]: (state, action) =>
       produce(state, draft => {
-        draft.list.unshift(action.payload.post); //push()는 뒤에 붙으니까 unshift를 사용
+        draft.list.unshift(actiion.payload.post);
       }),
   },
   initialState

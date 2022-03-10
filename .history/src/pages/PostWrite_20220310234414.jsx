@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Button, Input, Image, Text, Grid } from '../elements/Index';
 import Upload from '../shared/Upload';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
 // import { useNavigate } from 'react-router-dom';
 
 const PostWrite = props => {
   const dispatch = useDispatch();
-
   //App.js에서 is_login이 세션의 유무를 체크했으니 여기서는 그냥 is_login만 체크함
   const is_login = useSelector(state => state.user.is_login);
   // const navigate = useNavigate();
@@ -17,10 +15,6 @@ const PostWrite = props => {
 
   const changeContents = e => {
     setContents(e.target.value);
-  };
-
-  const addPost = () => {
-    dispatch(postActions.addPostFB(contents));
   };
 
   if (!is_login) {
@@ -63,7 +57,7 @@ const PostWrite = props => {
         <Input _onChange={changeContents} placeholder="게시글 작성" labal="게시글 내용" multiLine />
       </Grid>
       <Grid padding="16px">
-        <Button _onClick={addPost}>게시글 작성</Button>
+        <Button>게시글 작성</Button>
       </Grid>
     </>
   );
