@@ -1,5 +1,5 @@
 import react, { useRef } from 'react';
-import { Button } from '../elements';
+
 const Upload = props => {
   const fileInput = useRef();
 
@@ -9,20 +9,12 @@ const Upload = props => {
     console.log(e.target.files);
 
     // input이 실제로 작동하는지 확인
-    console.log(fileInput.current.files[0]);
-  };
-
-  // 이미지를 가지고 storage에 저장해주는 친구임.
-  const uploadFB = () => {
-    let image = fileInput.current.files[0];
-    const _upload = storage.ref(`images/${image.name}`).put();
+    console.log(fileInput.current.files);
   };
 
   return (
     <>
       <input type="file" onChange={selectFile} ref={fileInput} />
-
-      <Button _onClick={uploadFB}>업로드 하기</Button>
     </>
   );
 };

@@ -13,10 +13,7 @@ const Upload = props => {
   };
 
   // 이미지를 가지고 storage에 저장해주는 친구임.
-  const uploadFB = () => {
-    let image = fileInput.current.files[0];
-    const _upload = storage.ref(`images/${image.name}`).put();
-  };
+  const uploadFB = () => {};
 
   return (
     <>

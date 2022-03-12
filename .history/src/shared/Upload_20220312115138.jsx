@@ -12,17 +12,10 @@ const Upload = props => {
     console.log(fileInput.current.files[0]);
   };
 
-  // 이미지를 가지고 storage에 저장해주는 친구임.
-  const uploadFB = () => {
-    let image = fileInput.current.files[0];
-    const _upload = storage.ref(`images/${image.name}`).put();
-  };
-
   return (
     <>
       <input type="file" onChange={selectFile} ref={fileInput} />
-
-      <Button _onClick={uploadFB}>업로드 하기</Button>
+      <Button>업로드 하기</Button> // firestore 업로드하기
     </>
   );
 };
