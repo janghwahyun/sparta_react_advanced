@@ -18,6 +18,6 @@ const apiKey = firebaseConfig.apiKey;
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 const auth = firebaseApp.auth();
-const storage = firebase.storage();
+const storage = firebas.storage();
 
-export { firebaseApp, firestore, auth, apiKey, storage };
+export { firebaseApp, firestore, auth, apiKey };

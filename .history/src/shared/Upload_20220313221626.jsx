@@ -23,11 +23,6 @@ const Upload = props => {
     // 업로드!!
     _upload.then(snapshot => {
       console.log(snapshot);
-
-      // 업로드한 파일의 다운로드 경로를 가져오자!
-      snapshot.ref.getDownloadURL().then(url => {
-        console.log(url);
-      });
     });
   };
 

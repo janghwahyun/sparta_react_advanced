@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
-import { Button } from '../elements/Index';
-import { storage } from './firebase';
-
+import react, { useRef } from 'react';
+import { Button } from '../elements';
 const Upload = props => {
   const fileInput = useRef();
+
   const selectFile = e => {
     // e.target은 input이죵?
     // input이 가진 files 객체를 살펴봅시당
@@ -19,21 +18,11 @@ const Upload = props => {
   const uploadFB = () => {
     let image = fileInput.current.files[0];
     const _upload = storage.ref(`images/${image.name}`).put(image);
-
-    // 업로드!!
-    _upload.then(snapshot => {
-      console.log(snapshot);
-
-      // 업로드한 파일의 다운로드 경로를 가져오자!
-      snapshot.ref.getDownloadURL().then(url => {
-        console.log(url);
-      });
-    });
   };
 
   return (
     <>
-      <input type="file" ref={fileInput} onChange={selectFile} />
+      <input type="file" ref={fileInput} onChange={selectFile} ref={fileInput} />
 
       <Button _onClick={uploadFB}>업로드 하기</Button>
     </>

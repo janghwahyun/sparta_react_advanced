@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Button } from '../elements/Index';
+import { Button } from '../elements';
 import { storage } from './firebase';
 
 const Upload = props => {
@@ -23,17 +23,12 @@ const Upload = props => {
     // 업로드!!
     _upload.then(snapshot => {
       console.log(snapshot);
-
-      // 업로드한 파일의 다운로드 경로를 가져오자!
-      snapshot.ref.getDownloadURL().then(url => {
-        console.log(url);
-      });
     });
   };
 
   return (
     <>
-      <input type="file" ref={fileInput} onChange={selectFile} />
+      <input type="file" ref={fileInput} onChange={selectFile} ref={fileInput} />
 
       <Button _onClick={uploadFB}>업로드 하기</Button>
     </>
