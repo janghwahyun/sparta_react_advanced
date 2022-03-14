@@ -4,7 +4,6 @@ import { storage } from './firebase';
 
 const Upload = props => {
   const fileInput = useRef();
-
   const selectFile = e => {
     // e.target은 input이죵?
     // input이 가진 files 객체를 살펴봅시당
@@ -19,15 +18,12 @@ const Upload = props => {
   // 이미지를 가지고 storage에 저장해주는 친구임.
   const uploadFB = () => {
     let image = fileInput.current?.files[0]; // 옵셔널 체이닝
-    let storageRef = storage.ref();
-    let uploadLocation = storageRef.child(`images/ + '${image.name}'`);
-    let uploadWork = uploadLocation.put(image);
+    const _upload = ref(storage, `images/${image.name}`).put(image);
 
     // const _upload = storage.ref(`images/${image.name}`).put(image);
-    // const _upload = storage.ref().child(`images/${image.name}`).put(image);
 
     // 업로드!!
-    uploadWork.then(snapshot => {
+    _upload.then(snapshot => {
       console.log(snapshot);
 
       // 업로드한 파일의 다운로드 경로를 가져오자!

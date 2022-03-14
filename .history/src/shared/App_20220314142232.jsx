@@ -23,7 +23,7 @@ function App() {
 
   const is_login = useSelector(state => state.user.is_login);
   // const is_session = sessionStorage.getItem(_session_Key) ? true : false;
-  // const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
 
   // //유즈이펙트는 컴포넌트 라이프사이클에 컴포넌트 디드마운트랑, 디드 업데이트를 동시에 수행
   // useEffect(() => {

@@ -20,7 +20,7 @@ const Upload = props => {
   const uploadFB = () => {
     let image = fileInput.current?.files[0]; // 옵셔널 체이닝
     let storageRef = storage.ref();
-    let uploadLocation = storageRef.child(`images/ + '${image.name}'`);
+    let uploadLocation = storageRef.child(`images/${image.name}`);
     let uploadWork = uploadLocation.put(image);
 
     // const _upload = storage.ref(`images/${image.name}`).put(image);

@@ -18,9 +18,9 @@ const Upload = props => {
 
   // 이미지를 가지고 storage에 저장해주는 친구임.
   const uploadFB = () => {
-    let image = fileInput.current?.files[0]; // 옵셔널 체이닝
-    let storageRef = storage.ref();
-    let uploadLocation = storageRef.child(`images/ + '${image.name}'`);
+    let image = fileInput.current.files[0]; // 옵셔널 체이닝
+    // let storageRef = storage.ref();
+    let uploadLocation = fileInput.child(`images/ + '${image.name}'`);
     let uploadWork = uploadLocation.put(image);
 
     // const _upload = storage.ref(`images/${image.name}`).put(image);

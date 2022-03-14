@@ -23,14 +23,14 @@ function App() {
 
   const is_login = useSelector(state => state.user.is_login);
   // const is_session = sessionStorage.getItem(_session_Key) ? true : false;
-  // const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
 
-  // //유즈이펙트는 컴포넌트 라이프사이클에 컴포넌트 디드마운트랑, 디드 업데이트를 동시에 수행
-  // useEffect(() => {
-  //   if (is_session && is_login) {
-  //     dispatch(userActions.loginCkeckFB());
-  //   }
-  // }, []); //대괄호 안에있는 값이 업데이트 될 때, 작동한다. 만약 아무것도 없다면? 한번만 실행된다는 뜻. 즉 componentDidMount역할
+  //유즈이펙트는 컴포넌트 라이프사이클에 컴포넌트 디드마운트랑, 디드 업데이트를 동시에 수행
+  useEffect(() => {
+    if (is_session && is_login) {
+      dispatch(userActions.loginCkeckFB());
+    }
+  }, []); //대괄호 안에있는 값이 업데이트 될 때, 작동한다. 만약 아무것도 없다면? 한번만 실행된다는 뜻. 즉 componentDidMount역할
 
   return (
     <>
