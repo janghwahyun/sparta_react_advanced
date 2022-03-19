@@ -2,14 +2,12 @@ import React, { useRef } from 'react';
 import { Button } from '../elements/Index';
 import { storage } from './firebase';
 
-import { actionCreators as imageActions } from '../redux/modules/image';
+import {actionCreators as imageActions} from '../redux/modules/image'
 import { useDispatch, useSelector } from 'react-redux';
 
 const Upload = props => {
-  const dispatch = useDispatch();
-  const uploading = useSelector(state => {
-    state.image.uploading;
-  });
+ const dispatch = useDispatch();
+ const uploading = useSelector((state)=>{state.image.uploading});
 
   const fileInput = useRef();
 
@@ -27,11 +25,11 @@ const Upload = props => {
 
   // 이미지를 가지고 storage에 저장해주는 친구임.
   const uploadFB = () => {
-    if (!fileInput.current || fileInput.current.files.length === 0) {
-      window.alert('파일을 선택해 주세요');
-      return;
+
+    if(!fileInput.current || fileInput.current.files.length === 0){
+      window.alert(파일을 선택해 주세요);
     }
-    dispatch(imageActions.uploadImageFB(fileInput.current.files[0]));
+
 
     // let image = fileInput.current?.files[0]; // 옵셔널 체이닝
     // let storageRef = storage.ref();
@@ -45,7 +43,7 @@ const Upload = props => {
     // uploadWork.then(snapshot => {
     //   console.log(snapshot);
 
-    // 업로드한 파일의 다운로드 경로를 가져오자!
+      // 업로드한 파일의 다운로드 경로를 가져오자!
     //   snapshot.ref.getDownloadURL().then(url => {
     //     console.log(url);
     //   });
@@ -54,7 +52,7 @@ const Upload = props => {
 
   return (
     <>
-      <input type="file" ref={fileInput} onChange={selectFile} />
+      <input type="file" ref={fileInput} onChange={selectFile}  />
       <Button _onClick={uploadFB}>업로드 하기</Button>
     </>
   );

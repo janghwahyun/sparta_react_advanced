@@ -31,7 +31,6 @@ const Upload = props => {
       window.alert('파일을 선택해 주세요');
       return;
     }
-    dispatch(imageActions.uploadImageFB(fileInput.current.files[0]));
 
     // let image = fileInput.current?.files[0]; // 옵셔널 체이닝
     // let storageRef = storage.ref();
