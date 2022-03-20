@@ -34,35 +34,20 @@ const Upload = props => {
     // dispatch(imageActions.uploadImageFB(fileInput.current.files[0]));
 
     let image = fileInput.current?.files[0]; // 옵셔널 체이닝
-
-    // let storageRef = storage.ref();
-    // let uploadLocation = storageRef.child(`images/ + '${image.name}'`);
-    // let uploadWork = uploadLocation.put(image);
+    let storageRef = storage.ref();
+    let uploadLocation = storageRef.child(`images/ + '${image.name}'`);
+    let uploadWork = uploadLocation.put(image);
 
     const _upload = storage.ref(`images/${image.name}`).put(image);
-    // const _upload = storage.ref().child(`images/${image.name}`).put(image);
-    console.log('_upload working');
+    const _upload = storage.ref().child(`images/${image.name}`).put(image);
 
     // 업로드!!
-    _upload.then(snapshot => {
+    uploadWork.then(snapshot => {
       console.log(snapshot);
 
       // 업로드한 파일의 다운로드 경로를 가져오자!
       snapshot.ref.getDownloadURL().then(url => {
         console.log(url);
-
-        const reader = new FileReader();
-        const file = e.target.files[0];
-
-        //파일 내용을 읽어 옵시당
-        reader.readAsURL(file);
-
-        // 읽기가 끝나면 발생하는 이벤트 헨드러!!!!
-        reader.onloadend = () => {
-          // reader.result는 파일을 컨텐츠(내용물) 입니다.
-          console.log(reader.result);
-          dispatch(imageActions.setPreview(reader.result));
-        };
       });
     });
   };

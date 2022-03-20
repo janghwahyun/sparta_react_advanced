@@ -20,8 +20,9 @@ const setPreview = createAction(SET_PREVIEW, preview => {
   preview;
 });
 
-// 이 리듀서에 작성될 initialstate, 카멜캐이스 생각하자
-const initialState = {
+// 이 리듀서에 작성될 initialstate
+
+const initialstate = {
   image_url: '',
   uploading: false,
   preview: null,
@@ -66,7 +67,7 @@ export default handleActions(
       }),
     [SET_PREVIEW]: (state, action) =>
       produce(state, draft => {
-        draft.preview = action.payload.preview;
+        draft.preview = action.payload.uploading;
       }),
   },
   initialState
@@ -76,7 +77,6 @@ export default handleActions(
 const actionCreators = {
   uploadImage,
   uploadImageFB,
-  setPreview,
 };
 
 export { actionCreators };

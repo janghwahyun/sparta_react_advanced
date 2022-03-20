@@ -56,13 +56,6 @@ const Upload = props => {
 
         //파일 내용을 읽어 옵시당
         reader.readAsURL(file);
-
-        // 읽기가 끝나면 발생하는 이벤트 헨드러!!!!
-        reader.onloadend = () => {
-          // reader.result는 파일을 컨텐츠(내용물) 입니다.
-          console.log(reader.result);
-          dispatch(imageActions.setPreview(reader.result));
-        };
       });
     });
   };

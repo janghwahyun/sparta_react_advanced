@@ -61,7 +61,6 @@ const Upload = props => {
         reader.onloadend = () => {
           // reader.result는 파일을 컨텐츠(내용물) 입니다.
           console.log(reader.result);
-          dispatch(imageActions.setPreview(reader.result));
         };
       });
     });

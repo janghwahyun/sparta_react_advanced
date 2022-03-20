@@ -52,10 +52,8 @@ const PostWrite = props => {
       </Grid>
 
       <Grid>
-        <Image shape="rectagle" src={preview ? preview : console.log('프리뷰 없는디')}></Image>
-
         <Grid padding="16px">
-          <Text margin="0px" bold1>
+          <Text margin="0px" bold>
             미리보기
           </Text>
         </Grid>

@@ -20,11 +20,11 @@ const setPreview = createAction(SET_PREVIEW, preview => {
   preview;
 });
 
-// 이 리듀서에 작성될 initialstate, 카멜캐이스 생각하자
-const initialState = {
-  image_url: '',
+// 이 리듀서에 작성될 initialstate
+
+const initialstate = {
+  image_url: 'http://via.placeholder.com/400x300',
   uploading: false,
-  preview: null,
 };
 
 // firestore에 input저장 추가 함수
@@ -64,10 +64,6 @@ export default handleActions(
       produce(state, draft => {
         draft.uploading = action.payload.uploading;
       }),
-    [SET_PREVIEW]: (state, action) =>
-      produce(state, draft => {
-        draft.preview = action.payload.preview;
-      }),
   },
   initialState
 );
@@ -76,7 +72,6 @@ export default handleActions(
 const actionCreators = {
   uploadImage,
   uploadImageFB,
-  setPreview,
 };
 
 export { actionCreators };
